@@ -1,15 +1,21 @@
 class Solution {
+    static Integer[][] memo;
+
     static int solve(int i, int j, int[] nums){
         //base conditions
         if(i>j) return 0;
 
         if(i==j) return nums[i];
 
+        if(memo[i][j]!=null) return memo[i][j]; //agar already solved hai return it directly
+
         //Two best possible scenario for P1
         int take_i = nums[i] + Math.min(solve(i+2, j, nums), solve(i+1, j-1, nums));
         int take_j = nums[j] + Math.min(solve(i+1, j-1, nums), solve(i, j-2, nums));
 
-        return Math.max(take_i, take_j);
+        memo[i][j] = Math.max(take_i, take_j);
+
+        return memo[i][j];
 
     }
 
@@ -21,6 +27,8 @@ class Solution {
     public boolean predictTheWinner(int[] nums) {
         int total_score = 0;
         int n = nums.length;
+        memo = new Integer[n][n];
+        
         for(int i=0;i<nums.length;i++){
             total_score+= nums[i];
         }
