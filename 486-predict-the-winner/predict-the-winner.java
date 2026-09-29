@@ -1,5 +1,5 @@
 class Solution {
-    static Integer[][] memo;
+    static Integer[][] memo; // Solved using memoization;
 
     static int solve(int i, int j, int[] nums){
         //base conditions
